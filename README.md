@@ -3,7 +3,7 @@ MSU Spring 2024 Intro to Software Engineering (CSE - 4214), Group 7
 
 # Members, netid, Role:
 - Delgermurun Bayarsaikhan (DeeB313)
-- Harley Kurtycz (harley-k3)
+- Harley Kurtycz (harley-k3), hwk24, hwk24msstate.edu, Back-end development 
 - Frederick Dillistone (quirrelsbench)
 - Amiya White (ajwhite25), ajw795, Database Management
 
