@@ -2,8 +2,8 @@
 MSU Spring 2024 Intro to Software Engineering (CSE - 4214), Group 7
 
 # Members, netid, email, role:
-- Delgermurun Bayarsaikhan (DeeB313)
-- Harley Kurtycz (harley-k3), hwk24, hwk24@msstate.edu, Back-end development 
+- Delgermurun Bayarsaikhan (DeeB313), db3000, db3000@msstate.edu, Back-end Development
+- Harley Kurtycz (harley-k3), hwk24, hwk24@msstate.edu, Back-end Development 
 - Frederick Dillistone (quirrelsbench), fpd8, qdillistone@gmail.com, Front-End Development
 - Amiya White (ajwhite25), ajw795, whiteamiya17@gmail.com, Database Management
 
