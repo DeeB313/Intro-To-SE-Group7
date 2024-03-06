@@ -6,7 +6,7 @@ MSU Spring 2024 Intro to Software Engineering (CSE - 4214), Group 7
 - Harley Kurtycz (harley-k3), hwk24, hwk24@msstate.edu, Back-end Development 
 - Frederick Dillistone (quirrelsbench), fpd8, qdillistone@gmail.com, Front-End Development
 - Amiya White (ajwhite25), ajw795, whiteamiya17@gmail.com, Database Management
-- Jeffery Burns (ibrokemyleg28), jcb1251, jcb1251@msstate.edu, TBD
+- Jeffery Burns (ibrokemyleg28), jcb1251, jcb1251@msstate.edu, Front-End Development
 
 # Project Description:
 - A simple website for buying books with a user login, and checkout system. There are 3 types of users (buyer, seller, admin). Sellers could send a request to list and sell their products. Buyers could purchase from the said listed products. Admin can approve requests to list products, new users signing up, and delete pre-existing users' accounts.
@@ -26,4 +26,4 @@ MSU Spring 2024 Intro to Software Engineering (CSE - 4214), Group 7
 - CSS
 - Angularjs
 - Nodejs
-- MongoDB or DjangoDB
+- SQLDB
