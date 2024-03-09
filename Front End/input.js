@@ -2,11 +2,10 @@ function getInput() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("pwd").value;
     var verifyPassword = document.getElementById("verifypwd").value;
-    // verifyPassword(password, verifyPassword);  will be used before accepting input
     var email = document.getElementById("email").value;
     var address = document.getElementById("address").value;
     var cardNumber = document.getElementById("cardNum").value;
-    return [username,password, email, address, cardNumber]
+    return [username, password, verifyPassword, email, address, cardNumber]
 }
 
 function verifyPassword(password, verifyPassword) {
@@ -16,4 +15,16 @@ function verifyPassword(password, verifyPassword) {
     else {
         return false;
     }
+}
+
+function navigateHome() {
+    location.href = "home.html";
+}
+
+function register() {
+    var information = getInput();
+    verifyPassword(information[1], information[2]);
+    // do something with information
+
+    location.href = "login.html"
 }

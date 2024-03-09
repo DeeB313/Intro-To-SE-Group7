@@ -4,12 +4,17 @@
 
 <head>
 <title>Bully Books Registration</title>
+<style>
+h1 {text-align: center;}
+p {text-align: center;}
+</style>
 </head>
 <body>
 
 <h1>Bully Books</h1>
 <p>Registration for buyer.</p>
 
+<div style="text-align: center;">
 <label for="username">Username:</label><br>
 <input type="text" id="username" name="username"><br>
 <label for="pwd">Password:</label><br>
@@ -23,8 +28,9 @@
 <label for="cardNum">Card Number (Optional):</label><br>
 <input type="password" id="cardNum" name="cardNum"><br><br>
 
-<input id="submit" type="button" value="Submit" onclick="getInput();"/><br>
+<input id="submit" type="button" value="Submit" onclick="register();"/><br>
 <label for="test" id="test" name="test"></label>
+</div>
 
 </body>
 </html>
