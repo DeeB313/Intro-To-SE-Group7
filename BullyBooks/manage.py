@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+#py -m pip install django
+#py -m manage runserver
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
