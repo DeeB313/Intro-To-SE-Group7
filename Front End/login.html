@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html>
-<script src="input.js"></script>
+    <script src="input.js"></script>
 
-<head>
-<title>Bully Books Login</title>
-<style>
-h1 {text-align: center;}
-p {text-align: center;}
-</style>
-</head>
-<body>
+    <head>
+        <title>Bully Books Login</title>
+        <style>
+            h1 {text-align: center;}
+            p {text-align: center;}
+        </style>
+    </head>
+    <body>
+        <h1>Bully Books</h1>
+        <p>This is a the login page.</p>
 
-<h1>Bully Books</h1>
-<p>This is a the login page.</p>
+        <div style="text-align:center;">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="pwd">Password:</label><br>
+            <input type="password" id="pwd" name="pwd"><br><br>
 
-<div style="text-align:center;">
-<label for="username">Username:</label><br>
-<input type="text" id="username" name="username"><br>
-<label for="pwd">Password:</label><br>
-<input type="password" id="pwd" name="pwd"><br><br>
+            <input id="submit" type="button" value="Submit" onclick="navigateHome();"/><br>
 
-<input id="submit" type="button" value="Submit" onclick="navigateHome();"/><br>
-</div>
+            <a href="buyerRegistration.html">Create New Account</a>
+        </div>
 
-</body>
+    </body>
 </html>

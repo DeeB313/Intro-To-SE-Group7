@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product, Category
+from .models import Product, Category, Cart, CartItem
 
 from django.db.models import Q
 
@@ -23,6 +23,14 @@ def category_detail(request, slug):
 def product_detail(request, category_slug, slug):
     product = get_object_or_404(Product, slug=slug)
 
+    user = request.user
+    user_cart_items = Product.objects.filter(cartitem__user=user)
+    if (user_cart_items.contains(product)):
+        cart_status = True
+    else:
+        cart_status = False
+
     return render(request, 'inventory/product_detail.html', {
-        'product': product
+        'product': product,
+        'cart_status': cart_status
     })

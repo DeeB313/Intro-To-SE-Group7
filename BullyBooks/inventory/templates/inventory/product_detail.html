@@ -1,7 +1,6 @@
 {% extends 'core/base.html' %}
 
 {%block title %} {{product.title}} {%endblock%}
-
 {%block content %} 
     {% if product.image %}
         <div class="image mb-3">
@@ -16,12 +15,24 @@
         <a href="{% url 'seller_detail' product.user.id %}">{% firstof product.user.get_full_name product.user.username %}</a>
     </p>
     
-
-
     {% if product.description %}
     <p class="mt-4">
         {{product.description}}
     </p>
+    {% endif %}
+
+    {% if cart_status == True %}
+        <br>
+        <p class="text-xl text-black">In Cart:</p>
+        <form method="post" action="{% url 'cart' %}">
+            {% csrf_token %}
+            <button type="submit" class="mt-6 inline-block py-4 px-6 bg-red-900 text-white">Remove From Cart</button>
+        </form>
+    {% elif cart_status == False %}
+        <form method="post" action="{% url 'cart' %}">
+            {% csrf_token %}
+            <button type="submit" class="mt-6 inline-block py-4 px-6 bg-red-900 text-white">Add To Cart</button>
+        </form>
     {% endif %}
 
 {%endblock%}

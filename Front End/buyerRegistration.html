@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html>
-<script src="input.js"></script>
+    <script src="input.js"></script>
 
-<head>
-<title>Bully Books Registration</title>
-<style>
-h1 {text-align: center;}
-p {text-align: center;}
-</style>
-</head>
-<body>
+    <head>
+        <title>Bully Books Registration</title>
+        <style>
+            h1 {text-align: center;}
+            p {text-align: center;}
+        </style>
+    </head>
+    <body>
+        <h1>Bully Books</h1>
+        <p>Registration for buyer.</p>
 
-<h1>Bully Books</h1>
-<p>Registration for buyer.</p>
+        <div style="text-align: center;">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="pwd">Password:</label><br>
+            <input type="password" id="pwd" name="pwd"><br>
+            <label for="pwd">Verify Password:</label><br>
+            <input type="password" id="verifypwd" name="verifypwd"><br>
+            <label for="email">Email:</label><br>
+            <input type="text" id="email" name="email"><br>
+            <label for="address">Address (Optional):</label><br>
+            <input type="text" id="address" name="address"><br>
+            <label for="cardNum">Card Number (Optional):</label><br>
+            <input type="password" id="cardNum" name="cardNum"><br><br>
 
-<div style="text-align: center;">
-<label for="username">Username:</label><br>
-<input type="text" id="username" name="username"><br>
-<label for="pwd">Password:</label><br>
-<input type="password" id="pwd" name="pwd"><br>
-<label for="pwd">Verify Password:</label><br>
-<input type="password" id="verifypwd" name="verifypwd"><br>
-<label for="email">Email:</label><br>
-<input type="text" id="email" name="email"><br>
-<label for="address">Address (Optional):</label><br>
-<input type="text" id="address" name="address"><br>
-<label for="cardNum">Card Number (Optional):</label><br>
-<input type="password" id="cardNum" name="cardNum"><br><br>
-
-<input id="submit" type="button" value="Submit" onclick="register();"/><br>
-<label for="test" id="test" name="test"></label>
-</div>
-
-</body>
+            <input id="submit" type="button" value="Submit" onclick="register();"/><br>
+            <label for="test" id="test" name="test"></label>
+        </div>
+    </body>
 </html>

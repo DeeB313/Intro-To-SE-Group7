@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Checkout   {% endblock %}
+{% block content %}
+<h1 class="text-2xl"> Checkout </h1>
+
+<br>
+<p>Billing Address:</p>
+<input type="text" name="address" placeholder=" Address"><br><br>
+<p>Card Number:</p>
+<input type="number" name="cardNum" placeholder=" ****-****-****-****"><br><br>
+<p>Expiration Date:</p>
+<input type="month" name="expiration" placeholder=" MM/YY"><br><br>
+<p>Security Code:</p>
+<input type="number" name="securityCode" placeholder=" ***"><br><br>
+<p>Total: ${{total}}</p>
+
+<form method="post" action="{% url 'frontpage' %}">
+    {% csrf_token %}
+    <button type="submit" class="mt-6 inline-block py-4 px-6 bg-red-900 text-white">Checkout</button>
+</form>
+{% endblock %}

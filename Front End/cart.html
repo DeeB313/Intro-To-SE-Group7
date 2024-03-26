@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <script src="cart.js"></script>
+
+    <head>
+        <title>Bully Books Home</title>
+        <style>
+            h1 {text-align: center;}
+            p {text-align: center;}
+        </style>
+    </head>
+    <body>
+        <h1>Bully Books</h1>
+        <p>This is the cart page.</p>
+
+        <div style="text-align: right;">
+            <input id="home" type="button" value="Home" onclick="navigateToHome();"/><br>
+        </div>
+
+        <div style="text-align: center;">
+            <p1>Will contain books in cart info.</p1><br><br>
+            <p1>Total Price:</p1>
+            <p1 id="total">#</p1><br>
+        </div>
+
+        <div style="text-align: center;">
+            <input id="checkout" type="button" value="Checkout" onclick="checkout()"/>
+        </div>
+    </body>
+</html>

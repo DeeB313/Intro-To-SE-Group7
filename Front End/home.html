@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Bully Books Home</title>
-<style>
-h1 {text-align: center;}
-p {text-align: center;}
-</style>
-</head>
-<body>
+    <script src="home.js"></script>
 
-<h1>Bully Books</h1>
-<p>This is the home page.</p>
+    <head>
+        <title>Bully Books Home</title>
+        <style>
+            h1 {text-align: center;}
+            p {text-align: center;}
+        </style>
+    </head>
+    <body>
+        <h1>Bully Books</h1>
+        <p>This is the home page.</p>
 
-</body>
+        <div style="text-align: right;">
+            <input id="login" type="button" value="Login" onclick="navigateToLogin();"/><br>
+        </div>
+        <div style="text-align: center;">
+            <label for="pwd">Search:</label><br>
+            <input type="text" id="search" name="search"><br>
+        </div>
+
+        <div style="text-align: right;">
+            <input id="cart" type="button" value="Cart" onclick="navigateToCart();"/><br>
+        </div>
+
+        <div style="text-align: center;">
+            <p1>Will contain search info.</p1><br>
+            <input id="book1" type="button" value="Placeholder Book Interaction" onclick="navigateToBook();"/>
+        </div>
+    </body>
 </html>

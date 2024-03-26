@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <script src="payment.js"></script>
+
+    <head>
+        <title>Bully Books Home</title>
+        <style>
+            h1 {text-align: center;}
+            p {text-align: center;}
+        </style>
+    </head>
+    <body>
+        <h1>Bully Books</h1>
+
+        <div style="text-align: center;">
+            <p1>Confirm Payment Information:</p1><br>
+            <p1>Address:</p1>
+            <p1 id="address">#</p1><br>
+            <p1>Card Number:</p1>
+            <p1 id="cardNum">#</p1><br><br>
+
+            <p1>Total Price:</p1>
+            <p1 id="total">#</p1><br>
+        </div>
+
+        <div style="text-align: center;">
+            <input id="confirm" type="button" value="Confirm" onclick="chargeUser()"/>
+            <input id="cancel" type="button" value="Cancel" onclick="navigateToCheckout();"/><br>
+        </div>
+    </body>
+</html>
