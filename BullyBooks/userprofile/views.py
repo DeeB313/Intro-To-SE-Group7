@@ -34,7 +34,7 @@ def sign_up(request):
 def my_account(request):
     return render(request, 'userprofile/myaccount.html')
 
-def cart(request, action=None, item=None):
+def cart(request):
     products = Product.objects.filter(cartitem__user=request.user)
     total = Cart.objects.filter(user=request.user)[0].total
     return render(request, 'userprofile/cart.html', { 
