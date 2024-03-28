@@ -24,4 +24,18 @@
     </p>
     {% endif %}
 
+    {% if cart_status == True %}
+        <br>
+        <p class="text-xl text-black">In Cart:</p>
+        <form method="post" action="{% url 'cart' 'remove' product.title %}">
+            {% csrf_token %}
+            <button type="submit" class="mt-6 inline-block py-4 px-6 bg-red-900 text-white">Remove From Cart</button>
+        </form>
+    {% elif cart_status == False %}
+        <form method="post" action="{% url 'cart' 'add' product.title %}">
+            {% csrf_token %}
+            <button type="submit" class="mt-6 inline-block py-4 px-6 bg-red-900 text-white">Add To Cart</button>
+        </form>
+    {% endif %}
+
 {%endblock%}

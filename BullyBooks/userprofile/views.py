@@ -12,6 +12,8 @@ from django.contrib import messages
 
 # from django.shortcuts import redirect
 
+from inventory.models import Product, Cart, CartItem
+
 # Create your views here.
 def seller_detail(request, pk):
     user = User.objects.get(pk=pk)
@@ -41,6 +43,20 @@ def sign_up(request):
 def my_account(request):
     return render(request, 'userprofile/myaccount.html')
 
+def cart(request, action=None, title=None):
+    if action != None and title != None:
+        if action == "add":
+            Cart.objects.get(user=request.user).add_to_cart(title)
+        elif action == "remove":
+            Cart.objects.get(user=request.user).remove_from_cart(title)
+        
+    products = Product.objects.filter(cartitem__user=request.user)
+    total = Cart.objects.filter(user=request.user)[0].total
+    return render(request, 'userprofile/cart.html', { 
+        'products': products,
+        'total': total,
+    })
+
 @login_required
 def my_items(request):
     products = request.user.products.exclude(status=Product.INACTIVE)
@@ -69,7 +85,7 @@ def add_items(request):
         'title': 'Add Items',
         'form': form
     })
-
+        
 @login_required
 def edit_items(request, pk):
     product = Product.objects.filter(user=request.user).get(pk=pk)
