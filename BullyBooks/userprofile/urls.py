@@ -8,6 +8,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('myaccount/', views.my_account, name='my_account'),
     path('my-items/', views.my_items, name='my_items'),
+    path('my-items/order-details/<int:pk>/', views.my_items_order_detail, name='my_items_order_detail'),
     path('my-items/add-items/', views.add_items, name='add_items'),
     path('my-items/edit-items/<int:pk>/', views.edit_items, name='edit_items'),
     path('my-items/delete-items/<int:pk>/', views.delete_items, name='delete_items'),

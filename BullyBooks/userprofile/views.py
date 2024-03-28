@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 from .models import Userprofile
 from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
-from inventory.models import Product
+from inventory.models import Product, Order, OrderItem
 from inventory.forms import ProductForm
 
 from django.contrib import messages
@@ -44,9 +44,23 @@ def my_account(request):
 @login_required
 def my_items(request):
     products = request.user.products.exclude(status=Product.INACTIVE)
+    order_list = OrderItem.objects.filter(product__user=request.user)
+
+
     return render(request, 'userprofile/myitems.html', {
         'products': products,
+        'order_list': order_list
     })
+
+@login_required
+def my_items_order_detail(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+
+    return render(request, 'userprofile/my_items_order_detail.html', {
+        'order': order
+    })
+
+
 
 @login_required
 def add_items(request):

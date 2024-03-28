@@ -11,8 +11,8 @@
                 <div class="p-4 bg-gray-300">
                     <a href="{% url 'product_detail' product.category.slug product.slug %}">
                         {% if product.image %}
-                        <div class="image mb-3">
-                            <img src="{{ product.image.url }}" alt="image of {{product.title }}">
+                        <div class="image mt-2.5 mb-1">
+                            <img src="{{ product.image.url }}" alt="image of {{ product.title }}">
                         </div>
                         {% endif %}
                         <h2 class="text-xl">{{product.title }}</h2>

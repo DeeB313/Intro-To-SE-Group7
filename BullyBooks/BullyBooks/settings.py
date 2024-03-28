@@ -16,8 +16,17 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'frontpage'
-LOGIN_REDIRECT_URL = 'my_account'
+LOGIN_REDIRECT_URL = 'frontpage'
+WEBSITE_URL = 'https://127.0.0.1:8000/'
+
+
+CART_SESSION_ID = 'cart'
+SESSION_COOKIE_AGE = 86400
+
+STRIPE_PUBLIC_KEY = 'pk_test_51Oz9tPRqOCg8GcJHwH9x1plHmjU8hvnIJjKzJ1Nw5tAzH2TIAkbS32WPlVVkIz1wlSdG8K88jvseCxJ0raZbPB1v00SEDc2sFs'
+STRIPE_SECRET_KEY = 'sk_test_51Oz9tPRqOCg8GcJH8nniqfCPqQ8uu9vOG435NkBEWNpYcMgymVCSjeMd4edeZgI24ygBFmLcGrTMggTCCoViCxru00oPk5iurG'
 
 
 # Quick-start development settings - unsuitable for production
@@ -69,6 +78,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'inventory.context_processors.cart',
             ],
         },
     },

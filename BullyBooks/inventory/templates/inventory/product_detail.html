@@ -4,8 +4,8 @@
 
 {%block content %} 
     {% if product.image %}
-        <div class="image mb-3">
-            <img src="{{ product.image.url }}" alt="image of {{product.title }}">
+        <div class="image mt-2.5 mb-1">
+            <img src="{{ product.image.url }}" alt="image of {{ product.title }}">
         </div>
     {% endif %}
 
@@ -23,5 +23,7 @@
         {{product.description}}
     </p>
     {% endif %}
+
+    <a href="{% url 'add_to_cart' product.id%}" class="mt-2 inline-block px-6 py-4 bg-yellow-700 text-white">Add to Cart</a>
 
 {%endblock%}
