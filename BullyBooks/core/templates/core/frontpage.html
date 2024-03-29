@@ -7,7 +7,7 @@ Welcome
 {% block content %}
     <div class="flex flex-wrap">
         {% for product in products %}
-            <div class="product w-1/4 p-2">
+            <div class="products w-1/3 p-2">
                 <div class="p-4 bg-gray-300">
                     <a href="{% url 'product_detail' product.category.slug product.slug %}">
                         <h2 class="text-xl">{{product.title }}</h2>

@@ -10,6 +10,8 @@ from inventory.forms import ProductForm
 
 from django.contrib import messages
 
+from .forms import UserRegistrationForm
+
 # from django.shortcuts import redirect
 
 # Create your views here.
@@ -23,7 +25,7 @@ def seller_detail(request, pk):
 
 def sign_up(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
 
         if form.is_valid():
             user = form.save()
@@ -31,7 +33,7 @@ def sign_up(request):
             userprofile = Userprofile.objects.create(user=user)
             return redirect('frontpage')
     else:
-        form = UserCreationForm()
+        form = UserRegistrationForm()
 
     return render(request, 'userprofile/signup.html', {
         'form': form
