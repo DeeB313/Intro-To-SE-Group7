@@ -1,0 +1,10 @@
+
+<select onchange= "window.location.href=this.value" class="text-black">
+    <option value='#' selected disabled hidden>Genre</option>
+    {% for category in categories %}
+        <option value="{% url 'category_detail' category.slug %}">
+            {{category.title}}
+        </option>
+    {% endfor %}
+</select>
+<a href="{% url 'about' %}" class="text-white rounded-xl">About</a>

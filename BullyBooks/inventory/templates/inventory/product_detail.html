@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+
+{%block title %} {{product.title}} {%endblock%}
+
+{%block content %} 
+
+    <h1 class="text-2xl">{{product.title}}</h1>
+    <p class="text-sm text-gray-600">
+        ${{product.get_display_price}}
+        -
+        <a href="{% url 'seller_detail' product.user.id %}">{% firstof product.user.get_full_name product.user.username %}</a>
+    </p>
+    
+
+    {% if product.image %}
+        <div class="image mt-2.5 mb-1">
+            <img src="{{ product.image.url }}" alt="image of {{ product.title }}">
+        </div>
+    {% endif %}
+    
+    {% if product.description %}
+    <p class="mt-4">
+        {{product.description}}
+    </p>
+    {% endif %}
+
+    <a href="{% url 'add_to_cart' product.id%}" class="mt-2 inline-block px-6 py-4 bg-yellow-700 text-white">Add to Cart</a>
+
+{%endblock%}
