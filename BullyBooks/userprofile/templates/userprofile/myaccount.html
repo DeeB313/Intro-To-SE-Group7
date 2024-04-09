@@ -1,11 +1,53 @@
 {% extends 'core/base.html' %}
 
-{% block title %} My Account   {% endblock %}
+{% block title %} My Account {% endblock %}
 {% block content %}
 <h1 class="text-2xl"> My Account </h1>
+
+<!-- Tabs for account type and user information -->
+<div class="mt-6">
+    <nav>
+        <div class="flex mb-4">
+            <button class="tab-button py-2 px-4 text-white bg-red-900 hover:bg-red-700" onclick="openTab(event, 'accountTypeContent')" id="defaultOpen">Account Type</button>
+            <button class="tab-button py-2 px-4 text-white bg-red-900 hover:bg-red-700" onclick="openTab(event, 'userInfoContent')">User Information</button>
+        </div>
+    </nav>
+    <div id="accountTypeContent" class="tab-content">
+        {% if request.user.userprofile.is_seller %}
+            <p>Account Type: Seller</p>
+            <p>{{ request.user.userprofile.seller_detail}}</p>
+        {%else%}
+            <p>Account Type: Buyer</p>
+        {% endif %}
+
+    </div>
+    <div id="userInfoContent" class="tab-content" style="display:none;">
+        <p>Name: {{ request.user.first_name }} {{ request.user.last_name }}</p>
+        <p>Email: {{ request.user.email }}</p>
+        
+    </div>
+</div>
 
 <form method="post" action="{% url 'logout' %}">
     {% csrf_token %}
     <button type="submit" class="mt-6 inline-block py-4 px-6 bg-red-900 text-white">Logout</button>
 </form>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tab-button");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    document.getElementById("defaultOpen").click();
+</script>
 {% endblock %}
+

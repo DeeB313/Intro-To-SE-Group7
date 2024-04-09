@@ -1,5 +1,5 @@
 
-<select onchange= "window.location.href=this.value" class="text-black">
+<select onchange= "window.location.href=this.value" class="py-2 px-4 text-white rounded-xl bg-red-900 hover:bg-red-700">
     <option value='#' selected disabled hidden>Genre</option>
     {% for category in categories %}
         <option value="{% url 'category_detail' category.slug %}">
@@ -7,4 +7,3 @@
         </option>
     {% endfor %}
 </select>
-<a href="{% url 'about' %}" class="text-white rounded-xl">About</a>
