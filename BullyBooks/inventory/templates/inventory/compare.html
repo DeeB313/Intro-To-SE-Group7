@@ -2,5 +2,36 @@
 {% block title %} Compare {% endblock %}
 
 {% block content %}
+
+<h1 class="text-4xl mb-6 font-bold text-center text-red-900">Compare By: </h1>
+<div class="mt-6">
+    <nav>
+        <div class="flex mb-4">
+            <button class="tab-button py-2 px-4 text-white bg-red-900 hover:bg-red-700" onclick="openTab(event, 'accountTypeContent')" id="defaultOpen">By Price</button>
+            <button class="tab-button py-2 px-4 text-white bg-red-900 hover:bg-red-700" onclick="openTab(event, 'userInfoContent')">By Most Popular</button>
+        </div>
+    </nav>
+
+{% if products %}
+    <div class="flex flex-wrap">
+        {% for product in products %}
+            <div class="product w-1/3 p-2">
+                <div class="p-4 bg-gray-300">
+                    <a href="{% url 'product_detail' product.category.slug product.slug %}">
+                        {% if product.image %}
+                            <div class="image mt-2.5 mb-1">
+                                <img src="{{ product.image.url }}" alt="image of {{ product.title }}">
+                            </div>
+                        {% endif %}
+                        <h2 class="text-xl">{{product.title }}</h2>
+                        <p class="text-sm text-gray-600">${{product.get_display_price}}</p>
+                    </a>
+                </div>
+            </div> 
+        {% endfor %}
+    </div>
+{% else %}
+    <p>There are currently no listing related to "{{results}}"</p>
+{% endif %}
    
 {% endblock %}
