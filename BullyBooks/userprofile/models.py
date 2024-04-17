@@ -7,4 +7,4 @@ class Userprofile(models.Model):
 
 
     def __str__(self):
-        return self.user.username
+        return f"{self.user.username} - {'Seller' if self.is_seller else 'Buyer'}"

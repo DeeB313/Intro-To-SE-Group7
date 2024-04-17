@@ -9,9 +9,9 @@ class UserRegistrationForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full p-1 border border-gray-200'}))
     password1 = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full p-1 border border-gray-200'}))
     password2 = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full p-1 border border-gray-200'}))
-    is_buyer = forms.BooleanField(label='Are you a Buyer?', required=False)
-    is_seller = forms.BooleanField(label='Are you a Seller?', required=False)
     
-    print("**Retype password in password2 section**")
-    print("User type:")
-
+    CHOICES =(
+        (1, 'Buyer'),
+        (2, 'Seller'),
+    )
+    user_type= forms.ChoiceField(label='What are you registering as?', choices=CHOICES, required=False)

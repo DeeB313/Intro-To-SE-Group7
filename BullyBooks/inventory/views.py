@@ -13,6 +13,9 @@ from django.contrib import messages
 
 from django.db.models import Q
 
+def compare(request):
+    return render(request, 'inventory/compare.html')
+
 def search(request):
     results = request.GET.get('results', '')
     products = Product.objects.filter(status=Product.ACTIVE).filter(Q(title__icontains=results) | Q(description__icontains=results))
