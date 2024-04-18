@@ -144,3 +144,9 @@ def change_quantity(request, product_id):
 
 def success(request):
     return render(request, 'inventory/success.html')
+
+def admin_unlist_item(request, product_id, from_path):
+    product = Product.objects.filter(id=product_id)[0]
+    product.delete()
+
+    return redirect(from_path)

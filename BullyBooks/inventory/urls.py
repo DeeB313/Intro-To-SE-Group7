@@ -12,4 +12,5 @@ urlpatterns = [
     path('cart/success/', views.success, name='success'),
     path('<slug:slug>/', views.category_detail, name='category_detail'),
     path('<slug:category_slug>/<slug:slug>/', views.product_detail, name='product_detail'),
+    path('admin_unlist_item/<str:product_id>/<path:from_path>/', views.admin_unlist_item, name="admin_unlist_item")
 ]
