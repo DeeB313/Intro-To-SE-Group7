@@ -41,6 +41,7 @@
                     {% if request.user.userprofile.is_seller %}
                         <a href="{% url 'my_items' %}" class="py-2 px-4 text-white rounded-xl bg-red-900 hover:bg-red-700">My Items</a>
                     {% endif %}
+                    <a href="{% url 'user_management' %}" class="py-2 px-4 text-white rounded-xl bg-red-900 hover:bg-red-700">User Management</a>
                     <a href="{% url 'my_account' %}" class="py-2 px-4 text-white rounded-xl bg-red-900 hover:bg-red-700">My Account</a>
                     
                 {% else %}

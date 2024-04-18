@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+
+{%block title %} User Management {%endblock%}
+
+{%block content %} 
+    <h2 class="text-2xl text-gray-500">Users</h2>
+    
+    {% for user in users %}
+            <div class="px-6 py-4 bg-gray-300 mb-2 flex items-center">
+                <div class="pl-6">
+                    <h2 class="text-2xl">{{ user.username }}</h2>
+
+                    <div class="mt-4 mb-4">
+                        {% if user.is_active %}
+                            Active
+                            <a href="{% url 'change_status' user.username %}?action=deactivate" class="p-2 rounded-xl bg-red-900 text-white"> Deactivate</a>
+                        {% elif not user.is_active %}
+                            Deactived
+                            <a href="{% url 'change_status' user.username %}?action=activate" class="p-2 rounded-xl bg-red-900 text-white"> Activate</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+{% endblock %}

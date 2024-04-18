@@ -116,3 +116,25 @@ def delete_items(request, pk):
 
     messages.success(request, 'The product was deleted succesfully')
     return redirect('my_items')
+
+@login_required
+def user_management(request):
+    users = User.objects.exclude(username=request.user.username)
+    return render(request, 'userprofile/user_management.html', {
+        'users': users
+    })
+
+def change_status(request, username):
+    user = User.objects.filter(username=username)[0]
+    action = request.GET.get('action', '')
+
+    if action:
+        status = True
+
+        if action == 'deactivate':   
+            status = False
+
+        user.is_active = status
+        user.save()
+
+    return redirect('user_management')
