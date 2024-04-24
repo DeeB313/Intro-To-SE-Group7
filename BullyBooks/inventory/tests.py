@@ -7,6 +7,8 @@ from userprofile.models import Userprofile
 from .cart import Cart
 from .forms import OrderForm
 from .views import compare
+from django.contrib.messages import get_messages
+
 
 # Admin test cases
 class AdminTestCase(TestCase):
@@ -151,3 +153,52 @@ class CompareViewTestCase(TestCase):
         self.assertIn('similar_products', response.context)
 
         self.assertTemplateUsed(response, 'inventory/compare.html')
+
+class EditItemsTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='testpassword!')
+        self.client.login(username='testuser', password='testpassword!')
+        self.product = Product.objects.create(user=self.user, name='Test Product', description='test', price=1000)
+
+    def test_click_username_seller_detail_page_access(self):
+        seller_detail_url = reverse('seller_detail', kwargs={'seller_id': self.user.id})
+        response = self.client.get(seller_detail_url)
+        self.assertEqual(response.status_code, 200)  #200 indicates successful access
+
+    def test_order_detail_page_access(self):
+        order = Order.objects.create(user=self.user, total_amount=5000)
+        order_detail_url = reverse('order_detail', kwargs={'order_id': order.id})
+        response = self.client.get(order_detail_url)
+        self.assertEqual(response.status_code, 200)  #200 indicates successful access
+
+    def test_edit_item(self):
+        edit_item_url = reverse('edit_items', kwargs={'pk': self.product.pk})
+        edited_data = {
+            'name': 'Edited Product Name',
+            'description': 'Edited Product Description',
+            'price': 1500,
+        }
+        response = self.client.post(edit_item_url, edited_data)
+        self.assertEqual(response.status_code, 302)  # 302 indicates successful redirect
+        edited_product = Product.objects.get(pk=self.product.pk)
+
+        self.assertEqual(edited_product.name, 'Edited Product Name')
+        self.assertEqual(edited_product.description, 'Edited Product Description')
+        self.assertEqual(edited_product.price, 15.00)
+
+    def test_edit_item_messages(self):
+        edit_item_url = reverse('edit_items', kwargs={'pk': self.product.pk})
+        edited_data = {
+            'name': 'Edited Product Name',
+            'description': 'Edited Product Description',
+            'price': 1500,
+        }
+        response = self.client.post(edit_item_url, edited_data, follow=True)
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'The changes were successful')
+
+        edited_product = Product.objects.get(pk=self.product.pk)
+        self.assertEqual(edited_product.name, 'Edited Product Name')
+        self.assertEqual(edited_product.description, 'Edited Product Description')
+        self.assertEqual(edited_product.price, 1500)
