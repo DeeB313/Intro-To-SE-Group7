@@ -6,6 +6,7 @@ from .models import Category, Product, Order, OrderItem
 from userprofile.models import Userprofile
 from .cart import Cart
 from .forms import OrderForm
+from .views import compare
 
 # Admin test cases
 class AdminTestCase(TestCase):
@@ -117,3 +118,36 @@ class OrderTestCase(TestCase):
         order.created_by = user
         order.save()
         self.assertIsNotNone(order.id)
+
+class CompareViewTestCase(TestCase):
+    def setUp(self):
+        # Create a category
+        self.category = Category.objects.create(name='Test Category', slug='test-category')
+
+        # Create original product
+        self.original_product = Product.objects.create(
+            name='Original Product',
+            price=10.99,
+            category=self.category
+        )
+
+        # Create similar products
+        self.similar_product1 = Product.objects.create(
+            name='Similar Product 1',
+            price=12.99,
+            category=self.category
+        )
+
+    def test_compare_view(self):
+        request = HttpRequest()
+        request.method = 'GET'
+
+        response = compare(request, category_slug=self.category.slug, product_id=self.original_product.pk)
+
+        self.assertEqual(response.status_code, 200)
+
+        self.assertIn('original_product', response.context)
+
+        self.assertIn('similar_products', response.context)
+
+        self.assertTemplateUsed(response, 'inventory/compare.html')

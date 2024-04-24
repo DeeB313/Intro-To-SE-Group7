@@ -2,6 +2,7 @@
 #import stripe
 
 #from django.http import JsonResponse
+from django.http import HttpRequest
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, Category, OrderItem
