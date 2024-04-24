@@ -13,8 +13,21 @@ from django.contrib import messages
 
 from django.db.models import Q
 
-def compare(request):
-    return render(request, 'inventory/compare.html')
+def compare(request, category_slug, product_id):
+    # Get the original product
+    original_product = get_object_or_404(Product, pk=product_id)
+
+    # Get the category of the original product
+    category = original_product.category
+
+    # Get similar products in the same category
+    similar_products = category.products.filter(status=Product.ACTIVE).exclude(pk=original_product.pk)[:2]
+
+    return render(request, 'inventory/compare.html', {
+        'category': category,
+        'original_product': original_product,
+        'similar_products': similar_products,
+    }) 
 
 def search(request):
     results = request.GET.get('results', '')

@@ -25,5 +25,7 @@
     {% endif %}
 
     <a href="{% url 'add_to_cart' product.id%}" class="mt-2 inline-block px-6 py-4 bg-yellow-700 text-white">Add to Cart</a>
+    <a href="{% url 'compare' product.category.slug product.id%}" class="mt-2 inline-block px-6 py-4 bg-red-900 text-white">Compare</a>
+
 
 {%endblock%}
