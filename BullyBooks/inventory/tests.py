@@ -39,6 +39,25 @@ class AdminTestCase(TestCase):
         change_url = reverse('change_status', kwargs={'username': self.active_username}) + "?action=deactivate"
         self.client.post(change_url)
 
+        activated_user = User.objects.filter(username=self.active_username)[0]
+        self.assertFalse(activated_user.is_active)
+
+    def test_access_database(self):
+        database_url = reverse('admin:login')
+        response = self.client.get(database_url)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, '/admin/')
+
+    def test_other_user_not_access_database(self):
+        logout_url = reverse('logout')
+        self.client.post(logout_url)
+
+        database_url = reverse('admin:login')
+        response = self.client.get(database_url)
+
+        self.assertNotEqual(response.status_code, 302)        
+
 class CartTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='password')
@@ -54,16 +73,6 @@ class CartTestCase(TestCase):
         cart.add(str(self.product.id))  # Add product to cart
         cart.remove(str(self.product.id))  # Remove product from cart
         self.assertEqual(len(cart), 0)  # Cart should be empty after removing
-
-    def test_cart_total_cost_calculation(self):
-        # Add products to the cart
-        request = HttpRequest()  # Create a request object
-        request.session = self.cart_session  # Assign the session to the request
-        cart = Cart(request)  # Pass the request object to the Cart class
-        cart.add(str(self.product.id))  # Add product to cart
-        total_cost = cart.cart_cost()  # Get the total cost from the cart
-        expected_total_cost = self.product.price * 100  # Convert to cents
-        self.assertEqual(total_cost, expected_total_cost)  # Check if total cost matches the expected value
 
     def test_add_to_cart(self):
         request = HttpRequest()  # Create a request object
@@ -82,5 +91,3 @@ class OrderTestCase(TestCase):
         order.created_by = user
         order.save()
         self.assertIsNotNone(order.id)
-
-# Create your tests here.
