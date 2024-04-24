@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.http import HttpRequest
 from .models import Category, Product, Order, OrderItem
+from userprofile.models import Userprofile
 from .cart import Cart
 from .forms import OrderForm
 
@@ -11,16 +12,26 @@ class AdminTestCase(TestCase):
     username = "adminTest"
     active_username = "activeUser"
     deactivated_username = "deactiveUser"
-    password = "adminLogin"
+    seller_username = "testSeller"
+    password = "testPassword"
 
     def setUp(self):
         admin = User.objects.create(username=self.username, is_staff=True)
         active_user = User.objects.create(username=self.active_username, is_active=True)
         deactivated_user = User.objects.create(username=self.deactivated_username, is_active=False)
+        seller = User.objects.create(username=self.seller_username)
+        seller_profile = Userprofile
         admin.set_password(self.password)
         admin.save()
         active_user.save()
         deactivated_user.save()
+        seller.save()
+
+        category = Category.objects.create(title="testCategory")
+        category.save()
+        product = Product.objects.create(user=seller, category=category, title="testBook", price=3099)
+        product.save()
+
         login_url = reverse('login')
         login_data = {
             'username': self.username,
@@ -56,7 +67,22 @@ class AdminTestCase(TestCase):
         database_url = reverse('admin:login')
         response = self.client.get(database_url)
 
-        self.assertNotEqual(response.status_code, 302)        
+        self.assertNotEqual(response.status_code, 302)
+
+    def test_remove_listing(self):
+        product = Product.objects.filter(title="testBook")[0]
+        search_url = reverse('search')
+
+        remove_listing_url = reverse('admin_unlist_item', kwargs={'product_id': product.id, 'from_path': search_url})
+        self.client.post(remove_listing_url)
+
+        try:
+            Product.objects.get(title="testBook")
+        except Product.DoesNotExist:
+            pass
+        else:
+            self.fail("Book was not removed")
+
 
 class CartTestCase(TestCase):
     def setUp(self):
