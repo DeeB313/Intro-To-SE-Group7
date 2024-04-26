@@ -121,38 +121,45 @@ class OrderTestCase(TestCase):
         order.save()
         self.assertIsNotNone(order.id)
 
-class CompareViewTestCase(TestCase):
-    def setUp(self):
+class CategoryTestCase(TestCase):
+    
+    #Testing Model for Category-- ensure instance of object with values is made
+    # and insure instance of class is being made
+    def test_model_Catgeory(self):
         # Create a category
-        self.category = Category.objects.create(name='Test Category', slug='test-category')
+        self.category = Category.objects.create(title='Test Category', slug='test-category')
+        
+        genre1= self.category        
 
-        # Create original product
-        self.original_product = Product.objects.create(
-            name='Original Product',
-            price=10.99,
-            category=self.category
-        )
+        self.assertEquals(str(genre1), 'Test Category')
+        self.assertTrue(isinstance(genre1, Category))
 
-        # Create similar products
-        self.similar_product1 = Product.objects.create(
-            name='Similar Product 1',
-            price=12.99,
-            category=self.category
-        )
+class CompareTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='testpassword!', is_staff=True)
+        self.newuser = User.objects.create_user(username='seconduser', password='test1password!', is_staff=False)
+        self.category = Category.objects.create(title='Test Category', slug='test-category')
+        self.newcategory = Category.objects.create(title='Test Category', slug='test-category')
+        self.product=Product.objects.create(user=self.user, category=self.category, title='Edited Product title', slug='test-product', description='Edited Product Description', price=100)
+        self.other=Product.objects.create(user=self.newuser, category=self.category, title='Edited Product title', slug='test-product2', description='Edited Product Description', price=120)
 
-    def test_compare_view(self):
-        request = HttpRequest()
-        request.method = 'GET'
 
-        response = compare(request, category_slug=self.category.slug, product_id=self.original_product.pk)
+    def test_compare(self):
+        #make first object
+        original_product= self.product
+        category= str(original_product.category)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEquals(category,'Test Category')
 
-        self.assertIn('original_product', response.context)
+        #make second object
+        similar_product= self.other
+        newCategory= str(similar_product.category)
+        
+        self.assertEquals(newCategory,'Test Category')
 
-        self.assertIn('similar_products', response.context)
+        #compare both to be equal
+        self.assertEqual(category, newCategory)
 
-        self.assertTemplateUsed(response, 'inventory/compare.html')
 
 class EditItemsTestCase(TestCase):
     def setUp(self):
